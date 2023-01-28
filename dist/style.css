@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@700&family=Oxygen+Mono&family=Passion+One&family=Share+Tech+Mono&display=swap');
+
+body{
+    background-color: black;
+    color: white;
+      position: relative;
+      margin: 0%;
+      margin-top: 4%;
+    font-family: roboto;
+}
+
+
+.naam-topstuk{
+    text-align: center;
+    color: rgb(231, 40, 231);
+    margin-bottom: 3%;
+}
+
+.foto-topstuk img {
+    width: 20%;
+    position: absolute;
+    margin-left: 40%;    
+    margin-top: 13%;    
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  justify-content: space-around;
+  align-items: normal;
+  align-content: normal;
+  margin-bottom: -10%;
+}
+
+.info-topstuk:nth-child(1) {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+}
+
+.info-topstuk2:nth-child(2) {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+}
+
+.info-topstuk img{
+    height: 20%;
+}
+
+.info-topstuk p{
+    padding:0% 5% ;
+}
+.info-topstuk{
+    text-align: center;
+}

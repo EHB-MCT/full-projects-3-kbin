@@ -1,0 +1,24 @@
+{
+  "name": "full-projects-3-kbin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EHB-MCT/full-projects-3-kbin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EHB-MCT/full-projects-3-kbin/issues"
+  },
+  "homepage": "https://github.com/EHB-MCT/full-projects-3-kbin#readme",
+  "dependencies": {
+    "three": "^0.149.0",
+    "three-orbit-controls": "^82.1.0"
+  }
+}
