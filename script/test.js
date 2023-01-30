@@ -30,6 +30,15 @@ const init = () => {
   earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
   scene.add(earthMesh);
 
+  //creat poi
+  const poiGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+const poiMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const poiMesh = new THREE.Mesh(poiGeometry, poiMaterial);
+poiMesh.position.set(1.5, 0.3, 2);
+scene.add(poiMesh);
+
+
+
   // Create a light
   const light = new THREE.DirectionalLight(0xffffff, 1);
   light.position.set(1, 1, 1);

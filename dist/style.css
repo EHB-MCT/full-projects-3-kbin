@@ -40,15 +40,18 @@ body{
   flex-basis: auto;
   align-self: auto;
   order: 0;
+  width: 35%;
 }
 
-.info-topstuk2:nth-child(2) {
+.info-topstuk:nth-child(2) {
   display: block;
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
   align-self: auto;
   order: 0;
+    width: 35%;
+
 }
 
 .info-topstuk img{
