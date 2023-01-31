@@ -2,7 +2,12 @@ window.onload = () => {
     getData()
 }
 function getData() {
-    fetch(`https://full-project-api.onrender.com/topstuk?id=4`)
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
+    console.log(params);
+
+    fetch(`https://full-project-api.onrender.com/topstuk?id=${params.id}`)
         .then(response => {
             return response.json();
         })
@@ -18,18 +23,18 @@ function getData() {
     </div>
 
     <div class="foto-topstuk">
-        <img src="https://www.linkpicture.com/q/skelet-icoon.png" alt="">
+        <img src="${e.fototopstuk}" alt="onbreekt">
     </div>
 <div class="flex-container">
     <div class="info-topstuk">
-        <img src="https://www.linkpicture.com/q/skelet-icoon.png" alt="">
+        <img src="${e.foto1}" alt="onbreekt">
 
         <h2>${e.titel1}</h2>
         <p>${e.beschrijving1}</p>
     </div>
 
     <div class="info-topstuk">
-        <img src="https://www.linkpicture.com/q/skelet-icoon.png" alt="">
+        <img src="${e.foto2}" alt="onbreekt">
 
         <h2>${e.titel2}</h2>
         <p>${e.beschrijving2}</p>
@@ -38,13 +43,13 @@ function getData() {
 
 <div class="flex-container">
        <div class="info-topstuk">
-        <img src="https://www.linkpicture.com/q/skelet-icoon.png" alt="">
+        <img src="${e.foto3}" alt="onbreekt">
 
         <h2>${e.titel3}</h2>
         <p>${e.beschrijving3}</p>
     </div>
         <div class="info-topstuk">
-        <img src="https://www.linkpicture.com/q/skelet-icoon.png" alt="">
+        <img src="${e.foto4}" alt="onbreekt">
 
         <h2>${e.titel4}</h2>
         <p>${e.beschrijving4}</p>

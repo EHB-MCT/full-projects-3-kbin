@@ -5,8 +5,6 @@ import {
 
 
 let scene, camera, renderer, controls, earthMesh;
-let poiMesh;
-
 
 const init = () => {
   // Create a scene
@@ -34,28 +32,47 @@ const init = () => {
   earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
   scene.add(earthMesh);
 
-  //creat poi
-  const poiGeometry = new THREE.SphereGeometry(0.02, 32, 32);
-  const poiMaterial = new THREE.MeshBasicMaterial({
-    color: 0xff0000
-  });
+
+
+
+
+  fetch('https://full-project-api.onrender.com/topstukken')
+   .then(response => {
+            return response.json();
+        })
+         .then((data) => {
+            console.log(data)
+data.forEach(e => {
+  let id = e.tid;
+    console.log(id);
+    let x= e.x;
+    let y= e.y;
+    let z = e.z;
+    console.log(x,y,z)
+   // let image = e.poifoto;
+
+
+// Create poi(button)
+const poiGeometry = new THREE.SphereGeometry(0.1, 32, 32);
+  const poiMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('/buidelwolf.png'),
+});
+  //const poiGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+  //const poiMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
   const poiMesh = new THREE.Mesh(poiGeometry, poiMaterial);
-  poiMesh.position.set(-0.1, 0.3, 0.99);
+  poiMesh.position.set(x, y, z);
   scene.add(poiMesh);
 
-  /*
-  // Create cube and add to scene
-  const geometry = new THREE.BoxGeometry(5, 1, 1);
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
-  */
+  // make the poi(button) a child of earthMesh
+  // so it follows it's position on the earth 
+  earthMesh.add(poiMesh);
+  // Render the scene
+  renderer.render(scene, camera);
 
-  // Add mouse click event to check if click is on cube
-let popupDisplayed = false;
-let popup;
 
+// Add mouse click event to check if click is on cube
 document.addEventListener("click", function (event) {
+
+  // Convert click coordinates to Three.js coordinates
   const rect = renderer.domElement.getBoundingClientRect();
   const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
   const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
@@ -64,42 +81,30 @@ document.addEventListener("click", function (event) {
   const raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
   const intersects = raycaster.intersectObjects([poiMesh]);
 
-  if (intersects.length > 0 && !popupDisplayed) {
-    popupDisplayed = true;
-    popup = document.createElement("div");
-    popup.style.position = "absolute";
-    popup.style.backgroundColor = "white";
-    popup.style.padding = "10px";
-    popup.innerHTML = "You clicked on the POI!";
-    document.body.appendChild(popup);
+  // If click was on cube, display pop-up
+  if (intersects.length > 0) {
+    window.location.href = `info.html?id=${id}`;
+    // Get screen resolution of both monitors
+const screen1 = window.screen.width;
+const screen2 = window.screen.width;
 
-    // update the position of the popup
-    const poiWorldPos = new THREE.Vector3();
-    poiWorldPos.setFromMatrixPosition(poiMesh.matrixWorld);
-    const pos = poiWorldPos.project(camera);
-    popup.style.left = (pos.x * rect.width / 2 + rect.width / 2) + "px";
-    popup.style.top = (-pos.y * rect.height / 2 + rect.height / 2) + "px";
-    
-    // Attach the popup to the POI
-    popup.object3D = new THREE.Object3D();
-    popup.object3D.position.copy(poiMesh.position);
-    poiMesh.add(popup.object3D);
-  } else if (popupDisplayed) {
-    popupDisplayed = false;
-    document.body.removeChild(popup);
-    // Detach the popup from the POI
-    poiMesh.remove(popup.object3D);
+  // Open two windows and set their size and position
+  const window1 = window.open(`info.html?id=${id}`, "Window 1", `width=${screen1/2}, height=${screen1}`);
+  window1.moveTo(0, 0);
+  const window2 = window.open("pangrea.html", "Window 2", `width=${screen2/2}, height=${screen2}`);
+  window2.moveTo(screen2/2, 0);
   }
 });
 
+ })
+
+ });
 
 
-
-  // Create a light
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(1, 1, 1);
-  scene.add(light);
-
+// Create a light
+  const light = new THREE.AmbientLight( 0x404040, 3.5 ); // white light, for all objects evenly
+  scene.add( light );
+  
   // Create a starfield
   const starPositions = new Float32Array(10000 * 3);
   for (let i = 0; i < 10000; i++) {
@@ -124,7 +129,7 @@ document.addEventListener("click", function (event) {
 const animate = () => {
   requestAnimationFrame(animate);
 
-  earthMesh.rotation.y += 0.0;
+  earthMesh.rotation.y += 0.001;
 
   renderer.render(scene, camera);
 };
