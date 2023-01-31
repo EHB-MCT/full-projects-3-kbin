@@ -12,7 +12,7 @@ const init = () => {
 
   // Create a camera
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 4;
+  camera.position.z = 2;
 
   // Create a renderer
   renderer = new THREE.WebGLRenderer();
@@ -32,10 +32,6 @@ const init = () => {
   earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
   scene.add(earthMesh);
 
-
-
-
-
   fetch('https://full-project-api.onrender.com/topstukken')
    .then(response => {
             return response.json();
@@ -49,12 +45,12 @@ data.forEach(e => {
     let y= e.y;
     let z = e.z;
     console.log(x,y,z)
-   // let image = e.poifoto;
+   let poifoto = e.poifoto;
 
 
 // Create poi(button)
 const poiGeometry = new THREE.SphereGeometry(0.1, 32, 32);
-  const poiMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('/buidelwolf.png'),
+  const poiMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load(poifoto),
 });
   //const poiGeometry = new THREE.SphereGeometry(0.05, 32, 32);
   //const poiMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
