@@ -12,7 +12,6 @@ function getData() {
             return response.json();
         })
         .then((e) => {
-
             console.log(e)
 
             let html = ''
@@ -24,12 +23,8 @@ function getData() {
                 <source src="/dist/videos/${e.hologram}" type="video/mp4">
             </video>
         </div>
-
-
-
             `;
 
             document.getElementById('hologram-video').innerHTML = html;
         });
-
 }

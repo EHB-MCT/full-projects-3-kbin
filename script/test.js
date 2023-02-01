@@ -33,81 +33,82 @@ const init = () => {
   scene.add(earthMesh);
 
   fetch('https://full-project-api.onrender.com/topstukken')
-   .then(response => {
-            return response.json();
-        })
-         .then((data) => {
-            console.log(data)
+    .then(response => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data)
 
-    let filteredData = data.filter(item => item.tid === "1" || item.tid === "2" || item.tid === "3"|| item.tid === "4"|| item.tid === "5");
-    console.log(filteredData);
+      let filteredData = data.filter(item => item.tid === "1" || item.tid === "2" || item.tid === "3" || item.tid === "4" || item.tid === "5" || item.tid === "6"|| item.tid === "7" || item.tid === "8");
+      console.log(filteredData);
 
-filteredData.forEach(e => {
+      filteredData.forEach(e => {
 
-  let id = e.tid;
-    console.log(id);
-    
-    let x= e.x;
-    let y= e.y;
-    let z = e.z;
-    console.log(x,y,z)
-   let poifoto = e.poifoto;
+        let id = e.tid;
+        console.log(id);
 
-
-// Create poi(button)
-const poiGeometry = new THREE.SphereGeometry(0.1, 32, 32);
-  const poiMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load(poifoto),
-});
-  //const poiGeometry = new THREE.SphereGeometry(0.05, 32, 32);
-  //const poiMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-  const poiMesh = new THREE.Mesh(poiGeometry, poiMaterial);
-  poiMesh.position.set(x, y, z);
-  scene.add(poiMesh);
-
-  // make the poi(button) a child of earthMesh
-  // so it follows it's position on the earth 
-  earthMesh.add(poiMesh);
-  // Render the scene
-  renderer.render(scene, camera);
+        let x = e.x;
+        let y = e.y;
+        let z = e.z;
+        console.log(x, y, z)
+        let poifoto = e.poifoto;
 
 
-// Add mouse click event to check if click is on cube
-document.addEventListener("click", function (event) {
+        // Create poi(button)
+        const poiGeometry = new THREE.SphereGeometry(0.1, 32, 32);
+        const poiMaterial = new THREE.MeshBasicMaterial({
+          map: new THREE.TextureLoader().load(poifoto),
+        });
+        //const poiGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+        //const poiMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const poiMesh = new THREE.Mesh(poiGeometry, poiMaterial);
+        poiMesh.position.set(x, y, z);
+        scene.add(poiMesh);
 
-  // Convert click coordinates to Three.js coordinates
-  const rect = renderer.domElement.getBoundingClientRect();
-  const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-  const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-  const vector = new THREE.Vector3(x, y, 0.5);
-  vector.unproject(camera);
-  const raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
-  const intersects = raycaster.intersectObjects([poiMesh]);
-
-  // If click was on cube, display pop-up
-  if (intersects.length > 0) {
-    window.location.href = `info.html?id=${id}`;
-    // Get screen resolution of both monitors
-const screen1 = window.screen.width;
-const screen2 = window.screen.width;
-
-  // Open two windows and set their size and position
-  //const window1 = window.open(`info.html?id=${id}`, "Window 1", `width=${screen1}, height=${screen1}`);
-  //window1.moveTo(screen1, 0);
-  
-  const window2 = window.open(`hologram.html?id=${id}`, "Window 2", `width=${screen2}, height=${screen2}`);
-  window2.moveTo(screen1 * 2, 0);
-  
-  }
-  
-});
- })
- });
+        // make the poi(button) a child of earthMesh
+        // so it follows it's position on the earth 
+        earthMesh.add(poiMesh);
+        // Render the scene
+        renderer.render(scene, camera);
 
 
-// Create a light
-  const light = new THREE.AmbientLight( 0x404040, 3.5 ); // white light, for all objects evenly
-  scene.add( light );
-  
+        // Add mouse click event to check if click is on cube
+        document.addEventListener("click", function (event) {
+
+          // Convert click coordinates to Three.js coordinates
+          const rect = renderer.domElement.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+          const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+          const vector = new THREE.Vector3(x, y, 0.5);
+          vector.unproject(camera);
+          const raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+          const intersects = raycaster.intersectObjects([poiMesh]);
+
+          // If click was on cube, display pop-up
+          if (intersects.length > 0) {
+            window.location.href = `info.html?id=${id}`;
+            // Get screen resolution of both monitors
+            const screen1 = window.screen.width;
+            const screen2 = window.screen.width;
+
+            // Open two windows and set their size and position
+            //const window1 = window.open(`info.html?id=${id}`, "Window 1", `width=${screen1}, height=${screen1}`);
+            //window1.moveTo(screen1, 0);
+
+            const window2 = window.open(`hologram.html?id=${id}`, "Window 2", `width=${screen2}, height=${screen2}`);
+            window2.moveTo(screen1 * 2, 0);
+
+          }
+
+        });
+      })
+    });
+
+
+  // Create a light
+  const light = new THREE.AmbientLight(0x404040, 3.5); // white light, for all objects evenly
+  scene.add(light);
+
   // Create a starfield
   const starPositions = new Float32Array(10000 * 3);
   for (let i = 0; i < 10000; i++) {
@@ -123,7 +124,7 @@ const screen2 = window.screen.width;
   const starField = new THREE.Points(starGeometry, starMaterial);
   scene.add(starField);
 
-  
+
   // Render the scene
   renderer.render(scene, camera);
 };
