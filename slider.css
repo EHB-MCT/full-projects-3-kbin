@@ -1,0 +1,36 @@
+.slider {
+    max-height: fit-content;
+    width: 7em;
+    background-color: rgba(255, 255, 255, 0.414);
+    border-radius: 5em;
+    position: absolute;
+    right: 17%;
+    bottom: 10%;
+    padding: 1em;
+  }
+
+ .slider img {
+    width: 100%;
+    border-radius: 50%;
+  }
+
+  .margin-slider {
+    margin-top: 1em;
+  }
+
+  .wereldbolActive {
+    /* opacity: 50%; */
+    
+    /* border: 5px solid;
+    border-color: rgb(0, 136, 255); */
+  }
+
+
+  /* header/years css */
+
+  .years h1 {
+    position: absolute;
+    color: white;
+    top: 0;
+    left: 50%;
+  }

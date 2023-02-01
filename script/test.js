@@ -134,7 +134,13 @@ const init = () => {
 const animate = () => {
   requestAnimationFrame(animate);
 
-  earthMesh.rotation.y += 0.00;
+  earthMesh.rotation.y += 0.0001;
+
+  // Transition to other world 
+
+  // if (window.onclick) {
+  //   camera.position.z += 1;
+  // }
 
   renderer.render(scene, camera);
 };
