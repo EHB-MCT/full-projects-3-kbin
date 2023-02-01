@@ -1,6 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@700&family=Oxygen+Mono&family=Passion+One&family=Share+Tech+Mono&display=swap');
 
 body{
+  margin: 0;
+  background-color: black;
+  
+}
+
+#hologram-video video{
+  width: 100%;
+  height: 100%;
+}
+/*
+
+body{
     background-color: black;
     color: white;
       position: relative;
@@ -64,3 +76,5 @@ body{
 .info-topstuk{
     text-align: center;
 }
+
+*/

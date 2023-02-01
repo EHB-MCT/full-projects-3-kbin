@@ -38,9 +38,15 @@ const init = () => {
         })
          .then((data) => {
             console.log(data)
-data.forEach(e => {
+
+    let filteredData = data.filter(item => item.tid === "1" || item.tid === "2" || item.tid === "3"|| item.tid === "4"|| item.tid === "5");
+    console.log(filteredData);
+
+filteredData.forEach(e => {
+
   let id = e.tid;
     console.log(id);
+    
     let x= e.x;
     let y= e.y;
     let z = e.z;
@@ -85,15 +91,16 @@ const screen1 = window.screen.width;
 const screen2 = window.screen.width;
 
   // Open two windows and set their size and position
-  const window1 = window.open(`info.html?id=${id}`, "Window 1", `width=${screen1/2}, height=${screen1}`);
-  window1.moveTo(0, 0);
-  const window2 = window.open("pangrea.html", "Window 2", `width=${screen2/2}, height=${screen2}`);
-  window2.moveTo(screen2/2, 0);
+  //const window1 = window.open(`info.html?id=${id}`, "Window 1", `width=${screen1}, height=${screen1}`);
+  //window1.moveTo(screen1, 0);
+  
+  const window2 = window.open(`hologram.html?id=${id}`, "Window 2", `width=${screen2}, height=${screen2}`);
+  window2.moveTo(screen1 * 2, 0);
+  
   }
+  
 });
-
  })
-
  });
 
 
@@ -116,6 +123,7 @@ const screen2 = window.screen.width;
   const starField = new THREE.Points(starGeometry, starMaterial);
   scene.add(starField);
 
+  
   // Render the scene
   renderer.render(scene, camera);
 };
@@ -125,7 +133,7 @@ const screen2 = window.screen.width;
 const animate = () => {
   requestAnimationFrame(animate);
 
-  earthMesh.rotation.y += 0.001;
+  earthMesh.rotation.y += 0.00;
 
   renderer.render(scene, camera);
 };
