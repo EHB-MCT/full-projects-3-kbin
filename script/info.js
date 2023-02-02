@@ -18,9 +18,10 @@ function getData() {
 
             html += `
 
+
                   <button type="submit">
              <a href="/dist/aarde.html">
-                <img width="50px" src="https://i.ibb.co/CW5Wvry/buttonpng.png"  />
+                <img width="50px" src="/dist/photos/aarde1.png"  />
              </a>
         </button>
 

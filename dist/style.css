@@ -9,6 +9,18 @@ body{
   width: 100%;
 }
 
+button {
+	background: none;
+  	border: none;
+
+position: absolute;
+right: 0;
+margin-right: 40px;
+
+}
+button img{
+  width: 80px;
+}
 
 .foto-topstuk img{
   margin-top: -100px;
