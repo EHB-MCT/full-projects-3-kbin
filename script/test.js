@@ -127,16 +127,28 @@ const init = () => {
 
   // Render the scene
   renderer.render(scene, camera);
+
 };
 
+let zoomOut = true;
+let animationSpeed = 5;
+
+function cameraAnimate() {
+  requestAnimationFrame(cameraAnimate);
+  if (zoomOut) {
+    camera.position.z += animationSpeed;
+    if (camera.position.z >= 1800) {
+      zoomOut = false;
+    }
+  } else {
+    camera.position.z -= animationSpeed;
+    if (camera.position.z = 2)
+    camera.position.z = 2
+  }
+}
 
 
-const animate = () => {
-  requestAnimationFrame(animate);
-
-  earthMesh.rotation.y += 0.0001;
-
-  // On slider click event: 
+// On slider click event: 
   // 1 zoom-out animation, 
   // 2 change earth texture,
   // 3 zoom-in animation & years title change
@@ -146,19 +158,37 @@ const animate = () => {
   wereldbol2.onclick = function() {
     wereldbol1.style.opacity = '50%'
     wereldbol2.style.opacity = '100%'
-   wereldbol2.classList.add('wereldbol2-active');
+    
+   wereldbol2.classList.add('wereldbol-active');
+   wereldbol1.classList.remove('wereldbol-active');
   }
   wereldbol1.onclick = function() {
     wereldbol2.style.opacity = '50%'
     wereldbol1.style.opacity = '100%'
+
+    wereldbol1.classList.add('wereldbol-active');
+    wereldbol2.classList.remove('wereldbol-active');
   }
-  // 1
-  if (wereldbol2.opacity = "100%") {
-    camera.position.z += 0.1;
+  
+  
+  if (wereldbol2.classList.contains('wereldbol-active')) {
+    if (camera.position.z <= 1800){
+    camera.position.z += 5;
+    
+    }
+    // else if (camera.position.z > 2) {
+    // camera.position.z -= 5;
+    // }
   }
+
+const animate = () => {
+  requestAnimationFrame(animate);
+
+  earthMesh.rotation.y += 0.0001;
 
   renderer.render(scene, camera);
 };
 
 init();
+// cameraAnimate();
 animate();

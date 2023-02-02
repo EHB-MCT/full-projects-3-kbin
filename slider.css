@@ -18,8 +18,12 @@
     margin-top: 1em;
   }
 
-  .wereldbol2-active {
-   
+  .wereldbol2 {
+    opacity: 50%;
+  }
+
+  .wereldbol-active {
+    opacity: 100%;
   }
 
 
