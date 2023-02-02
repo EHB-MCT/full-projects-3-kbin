@@ -38,7 +38,10 @@ const init = () => {
     bumpScale: 0,
   });
   earthMesh2 = new THREE.Mesh(earthGeometry, earthMaterial2);
-  scene.add(earthMesh);
+  scene.add(earthMesh, earthMesh2);
+
+  earthMesh.visible = false;
+  earthMesh2.visible = false;
 
   fetch('https://full-project-api.onrender.com/topstukken')
     .then(response => {
@@ -76,6 +79,78 @@ const init = () => {
         // make the poi(button) a child of earthMesh
         // so it follows it's position on the earth 
         earthMesh.add(poiMesh);
+        // Render the scene
+        renderer.render(scene, camera);
+
+
+        // Add mouse click event to check if click is on cube
+        document.addEventListener("click", function (event) {
+
+          // Convert click coordinates to Three.js coordinates
+          const rect = renderer.domElement.getBoundingClientRect();
+          const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+          const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+          const vector = new THREE.Vector3(x, y, 0.5);
+          vector.unproject(camera);
+          const raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+          const intersects = raycaster.intersectObjects([poiMesh]);
+
+          // If click was on cube, display pop-up
+          if (intersects.length > 0) {
+            window.location.href = `info.html?id=${id}`;
+            // Get screen resolution of both monitors
+            const screen1 = window.screen.width;
+            const screen2 = window.screen.width;
+
+            // Open two windows and set their size and position
+            //const window1 = window.open(`info.html?id=${id}`, "Window 1", `width=${screen1}, height=${screen1}`);
+            //window1.moveTo(screen1, 0);
+
+            const window2 = window.open(`hologram.html?id=${id}`, "Window 2", `width=${screen2}, height=${screen2}`);
+            window2.moveTo(screen1 * 2, 0);
+
+          }
+
+        });
+      })
+    });
+
+  fetch('https://full-project-api.onrender.com/topstukken')
+    .then(response => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data)
+
+      let filteredData = data.filter(item => item.tid === "9" || item.tid === "10" || item.tid === "11");
+      console.log(filteredData);
+
+      filteredData.forEach(e => {
+
+        let id = e.tid;
+        console.log(id);
+
+        let x = e.x;
+        let y = e.y;
+        let z = e.z;
+        console.log(x, y, z)
+        let poifoto = e.poifoto;
+
+
+        // Create poi(button)
+        const poiGeometry = new THREE.SphereGeometry(0.1, 32, 32);
+        const poiMaterial = new THREE.MeshBasicMaterial({
+          map: new THREE.TextureLoader().load(poifoto),
+        });
+        //const poiGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+        //const poiMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const poiMesh = new THREE.Mesh(poiGeometry, poiMaterial);
+        poiMesh.position.set(x, y, z);
+        scene.add(poiMesh);
+
+        // make the poi(button) a child of earthMesh
+        // so it follows it's position on the earth 
+        earthMesh2.add(poiMesh);
         // Render the scene
         renderer.render(scene, camera);
 
@@ -162,7 +237,8 @@ function cameraAnimate() {
     if (camera.position.z > 2) {
     camera.position.z -= 5;
     }
-    
+    earthMesh.visible = true;
+    earthMesh2.visible = false;
   }
 
   // WERELDBOL 2 ACTIEF
@@ -170,7 +246,8 @@ function cameraAnimate() {
     if (camera.position.z > 2) {
     camera.position.z -= 5;
     }
-    
+    earthMesh2.visible = true;
+    earthMesh.visible = false;
   }
 }
   
