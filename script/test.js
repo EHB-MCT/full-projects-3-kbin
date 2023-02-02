@@ -25,7 +25,7 @@ const init = () => {
   // Create an Earth sphere
   const earthGeometry = new THREE.SphereGeometry(1, 32, 32);
   const earthMaterial = new THREE.MeshPhongMaterial({
-    map: new THREE.TextureLoader().load('https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg'),
+    map: new THREE.TextureLoader().load('/wereldbol1.png'),
     bumpMap: new THREE.TextureLoader().load('https://threejs.org/examples/textures/waternormals.jpg'),
     bumpScale: 0,
   });
@@ -134,7 +134,28 @@ const init = () => {
 const animate = () => {
   requestAnimationFrame(animate);
 
-  earthMesh.rotation.y += 0.00;
+  earthMesh.rotation.y += 0.0001;
+
+  // On slider click event: 
+  // 1 zoom-out animation, 
+  // 2 change earth texture,
+  // 3 zoom-in animation & years title change
+
+  let wereldbol1 = document.querySelector('.wereldbol1');
+  let wereldbol2 = document.querySelector('.wereldbol2');
+  wereldbol2.onclick = function() {
+    wereldbol1.style.opacity = '50%'
+    wereldbol2.style.opacity = '100%'
+   wereldbol2.classList.add('wereldbol2-active');
+  }
+  wereldbol1.onclick = function() {
+    wereldbol2.style.opacity = '50%'
+    wereldbol1.style.opacity = '100%'
+  }
+  // 1
+  if (wereldbol2.opacity = "100%") {
+    camera.position.z += 0.1;
+  }
 
   renderer.render(scene, camera);
 };
