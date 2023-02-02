@@ -25,7 +25,7 @@ const init = () => {
   // Create an Earth sphere 1
   const earthGeometry = new THREE.SphereGeometry(1, 32, 32);
   const earthMaterial = new THREE.MeshPhongMaterial({
-    map: new THREE.TextureLoader().load('/wereldbol1.png'),
+    map: new THREE.TextureLoader().load('/dist/photos/wereldbol1.png'),
     bumpMap: new THREE.TextureLoader().load('https://threejs.org/examples/textures/waternormals.jpg'),
     bumpScale: 0,
   });
@@ -34,7 +34,7 @@ const init = () => {
  // Create an Earth sphere 2
   
   const earthMaterial2 = new THREE.MeshPhongMaterial({
-    map: new THREE.TextureLoader().load('/wereldbol2-modified.png'),
+    map: new THREE.TextureLoader().load('/dist/photos/wereldbol2-modified.png'),
     bumpMap: new THREE.TextureLoader().load('https://threejs.org/examples/textures/waternormals.jpg'),
     bumpScale: 0,
   });

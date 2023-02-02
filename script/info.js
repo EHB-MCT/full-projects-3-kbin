@@ -20,7 +20,7 @@ function getData() {
 
 
                   <button type="submit">
-             <a href="/dist/aarde.html">
+             <a href="/dist/index.html">
                 <img width="50px" src="/dist/photos/${e.aarde}"  />
              </a>
         </button>
