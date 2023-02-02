@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/npm/three@0.122.0/examples/jsm/controls/OrbitControls.js';
 
 
-let scene, camera, renderer, controls, earthMesh;
+let scene, camera, renderer, controls, earthMesh, earthMesh2, earthName;
 
 const init = () => {
   // Create a scene
@@ -12,8 +12,7 @@ const init = () => {
 
   // Create a camera
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 2;
-
+  camera.position.z = 1702;
   // Create a renderer
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -22,7 +21,7 @@ const init = () => {
   // Create orbit controls
   controls = new OrbitControls(camera, renderer.domElement);
 
-  // Create an Earth sphere
+  // Create an Earth sphere 1
   const earthGeometry = new THREE.SphereGeometry(1, 32, 32);
   const earthMaterial = new THREE.MeshPhongMaterial({
     map: new THREE.TextureLoader().load('/wereldbol1.png'),
@@ -30,6 +29,15 @@ const init = () => {
     bumpScale: 0,
   });
   earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+
+ // Create an Earth sphere 2
+  
+  const earthMaterial2 = new THREE.MeshPhongMaterial({
+    map: new THREE.TextureLoader().load('/wereldbol2-modified.png'),
+    bumpMap: new THREE.TextureLoader().load('https://threejs.org/examples/textures/waternormals.jpg'),
+    bumpScale: 0,
+  });
+  earthMesh2 = new THREE.Mesh(earthGeometry, earthMaterial2);
   scene.add(earthMesh);
 
   fetch('https://full-project-api.onrender.com/topstukken')
@@ -130,29 +138,9 @@ const init = () => {
 
 };
 
-let zoomOut = true;
-let animationSpeed = 5;
 
 function cameraAnimate() {
   requestAnimationFrame(cameraAnimate);
-  if (zoomOut) {
-    camera.position.z += animationSpeed;
-    if (camera.position.z >= 1800) {
-      zoomOut = false;
-    }
-  } else {
-    camera.position.z -= animationSpeed;
-    if (camera.position.z = 2)
-    camera.position.z = 2
-  }
-}
-
-
-// On slider click event: 
-  // 1 zoom-out animation, 
-  // 2 change earth texture,
-  // 3 zoom-in animation & years title change
-
   let wereldbol1 = document.querySelector('.wereldbol1');
   let wereldbol2 = document.querySelector('.wereldbol2');
   wereldbol2.onclick = function() {
@@ -169,17 +157,31 @@ function cameraAnimate() {
     wereldbol1.classList.add('wereldbol-active');
     wereldbol2.classList.remove('wereldbol-active');
   }
-  
-  
-  if (wereldbol2.classList.contains('wereldbol-active')) {
-    if (camera.position.z <= 1800){
-    camera.position.z += 5;
-    
+  // WERELDBOL 1 ACTIEF
+  if (wereldbol1.classList.contains('wereldbol-active')) {
+    if (camera.position.z > 2) {
+    camera.position.z -= 5;
     }
-    // else if (camera.position.z > 2) {
-    // camera.position.z -= 5;
-    // }
+    
   }
+
+  // WERELDBOL 2 ACTIEF
+  if (wereldbol2.classList.contains('wereldbol-active')) {
+    if (camera.position.z > 2) {
+    camera.position.z -= 5;
+    }
+    
+  }
+}
+  
+
+
+// On slider click event: 
+  // 1 zoom-out animation, 
+  // 2 change earth texture,
+  // 3 zoom-in animation & years title change
+
+  
 
 const animate = () => {
   requestAnimationFrame(animate);
@@ -190,5 +192,5 @@ const animate = () => {
 };
 
 init();
-// cameraAnimate();
+cameraAnimate();
 animate();
