@@ -19,7 +19,7 @@ function getData() {
             html += `
 
         <div class="loadVideo">
-            <video controls loop>
+            <video autoplay loop>
                 <source src="/dist/videos/${e.hologram}" type="video/mp4">
             </video>
         </div>
@@ -28,3 +28,6 @@ function getData() {
             document.getElementById('hologram-video').innerHTML = html;
         });
 }
+
+
+
