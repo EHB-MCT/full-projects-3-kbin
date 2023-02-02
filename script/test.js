@@ -4,12 +4,12 @@ import {
 } from 'https://cdn.jsdelivr.net/npm/three@0.122.0/examples/jsm/controls/OrbitControls.js';
 
 
-let scene, camera, renderer, controls, earthMesh, earthMesh2;
+let scene, camera, renderer, controls, earthMesh, earthMesh2, target;
 
 const init = () => {
   // Create a scene
   scene = new THREE.Scene();
-
+  target = new THREE.Vector3();
   // Create a camera
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.z = 1702;
@@ -242,6 +242,7 @@ function cameraAnimate() {
   if (wereldbol1.classList.contains('wereldbol-active')) {
     if (camera.position.z > 2) {
     camera.position.z -= 5;
+    camera.lookAt(target);
     }
     earthMesh.visible = true;
     earthMesh2.visible = false;
@@ -252,22 +253,14 @@ function cameraAnimate() {
   if (wereldbol2.classList.contains('wereldbol-active')) {
     if (camera.position.z > 2) {
     camera.position.z -= 5;
+    camera.lookAt(target);
     }
     earthMesh2.visible = true;
     earthMesh.visible = false;
     let titel1 = document.querySelector('.years h1');
     titel1.textContent = "60 miljoen jaar geleden";
   }
-}
-  
-
-
-// On slider click event: 
-  // 1 zoom-out animation, 
-  // 2 change earth texture,
-  // 3 zoom-in animation & years title change
-
-  
+} 
 
 const animate = () => {
   requestAnimationFrame(animate);
