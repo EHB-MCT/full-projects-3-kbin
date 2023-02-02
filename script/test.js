@@ -245,7 +245,8 @@ function cameraAnimate() {
     }
     earthMesh.visible = true;
     earthMesh2.visible = false;
-    
+    let titel1 = document.querySelector('.years h1');
+    titel1.textContent = "2.3 miljoen jaar geleden - heden";
   }
   // WERELDBOL 2 ACTIEF
   if (wereldbol2.classList.contains('wereldbol-active')) {
@@ -254,6 +255,8 @@ function cameraAnimate() {
     }
     earthMesh2.visible = true;
     earthMesh.visible = false;
+    let titel1 = document.querySelector('.years h1');
+    titel1.textContent = "60 miljoen jaar geleden";
   }
 }
   
