@@ -141,21 +141,21 @@ const animate = () => {
   // 2 change earth texture,
   // 3 zoom-in animation & years title change
 
-  // 1
   let wereldbol1 = document.querySelector('.wereldbol1');
   let wereldbol2 = document.querySelector('.wereldbol2');
   wereldbol2.onclick = function() {
     wereldbol1.style.opacity = '50%'
     wereldbol2.style.opacity = '100%'
+   wereldbol2.classList.add('wereldbol2-active');
   }
   wereldbol1.onclick = function() {
     wereldbol2.style.opacity = '50%'
     wereldbol1.style.opacity = '100%'
   }
-
-  // if (window.onclick) {
-  //   camera.position.z += 1;
-  // }
+  // 1
+  if (wereldbol2.opacity = "100%") {
+    camera.position.z += 0.1;
+  }
 
   renderer.render(scene, camera);
 };
