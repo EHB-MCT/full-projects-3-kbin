@@ -7,7 +7,7 @@ function getData() {
 
     console.log(params);
 
-    fetch(`https://full-project-api.onrender.com/topstuk?id=1`)
+    fetch(`https://full-project-api.onrender.com/topstuk?id=${params.id}`)
         .then(response => {
             return response.json();
         })
@@ -19,7 +19,7 @@ function getData() {
             html += `
 
         <div class="loadVideo">
-            <video autoplay loop>
+            <video controls loop>
                 <source src="/dist/videos/${e.hologram}" type="video/mp4">
             </video>
         </div>
