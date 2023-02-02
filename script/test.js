@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/npm/three@0.122.0/examples/jsm/controls/OrbitControls.js';
 
 
-let scene, camera, renderer, controls, earthMesh, earthMesh2, earthName;
+let scene, camera, renderer, controls, earthMesh, earthMesh2;
 
 const init = () => {
   // Create a scene
@@ -215,23 +215,29 @@ const init = () => {
 
 
 function cameraAnimate() {
+
   requestAnimationFrame(cameraAnimate);
   let wereldbol1 = document.querySelector('.wereldbol1');
   let wereldbol2 = document.querySelector('.wereldbol2');
+
   wereldbol2.onclick = function() {
     wereldbol1.style.opacity = '50%'
     wereldbol2.style.opacity = '100%'
     
    wereldbol2.classList.add('wereldbol-active');
    wereldbol1.classList.remove('wereldbol-active');
+   camera.position.z = 1702;
   }
+
   wereldbol1.onclick = function() {
     wereldbol2.style.opacity = '50%'
     wereldbol1.style.opacity = '100%'
 
     wereldbol1.classList.add('wereldbol-active');
     wereldbol2.classList.remove('wereldbol-active');
+    camera.position.z = 1702;
   }
+
   // WERELDBOL 1 ACTIEF
   if (wereldbol1.classList.contains('wereldbol-active')) {
     if (camera.position.z > 2) {
@@ -239,8 +245,8 @@ function cameraAnimate() {
     }
     earthMesh.visible = true;
     earthMesh2.visible = false;
+    
   }
-
   // WERELDBOL 2 ACTIEF
   if (wereldbol2.classList.contains('wereldbol-active')) {
     if (camera.position.z > 2) {
@@ -264,6 +270,7 @@ const animate = () => {
   requestAnimationFrame(animate);
 
   earthMesh.rotation.y += 0.0001;
+  earthMesh2.rotation.y += 0.0001;
 
   renderer.render(scene, camera);
 };
