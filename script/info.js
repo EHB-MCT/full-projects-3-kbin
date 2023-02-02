@@ -21,13 +21,13 @@ function getData() {
 
                   <button type="submit">
              <a href="/dist/aarde.html">
-                <img width="50px" src="/dist/photos/aarde1.png"  />
+                <img width="50px" src="/dist/photos/${e.aarde}"  />
              </a>
         </button>
 
 
         <div  class="background-info">
-            <img src="/dist/photos/stars.png" alt="">
+            <img src="/dist/photos/stars.jpg" alt="">
         </div>
 
 
@@ -84,7 +84,6 @@ function getData() {
         });
 
 }
-
 
 
 
