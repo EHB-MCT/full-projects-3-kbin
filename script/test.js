@@ -9,6 +9,7 @@ let scene, camera, renderer, controls, earthMesh, earthMesh2, target;
 const init = () => {
   // Create a scene
   scene = new THREE.Scene();
+  // Used for camera targeting during animation
   target = new THREE.Vector3();
   // Create a camera
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -226,7 +227,7 @@ function cameraAnimate() {
     
    wereldbol2.classList.add('wereldbol-active');
    wereldbol1.classList.remove('wereldbol-active');
-   camera.position.z = 1702;
+   camera.position.z = 1802;
   }
 
   wereldbol1.onclick = function() {
@@ -235,7 +236,7 @@ function cameraAnimate() {
 
     wereldbol1.classList.add('wereldbol-active');
     wereldbol2.classList.remove('wereldbol-active');
-    camera.position.z = 1702;
+    camera.position.z = 1802;
   }
 
   // WERELDBOL 1 ACTIEF
@@ -254,11 +255,21 @@ function cameraAnimate() {
     if (camera.position.z > 2) {
     camera.position.z -= 5;
     camera.lookAt(target);
+    
     }
     earthMesh2.visible = true;
     earthMesh.visible = false;
     let titel1 = document.querySelector('.years h1');
-    titel1.textContent = "60 miljoen jaar geleden";
+    titel1.innerHTML = `60 miljoen jaar geleden`;
+
+    // let count = 1;
+    // setInterval(() => {
+    //   document.querySelector(".years h1").textContent = `${count} miljoen jaar geleden`;
+    //   count++ *2;
+    //   if (count > 60) {
+    //     clearInterval(setInterval);
+    //   }
+    //   }, 100);
   }
 } 
 
